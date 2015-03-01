@@ -2,6 +2,7 @@ package com.sa.common.controller;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.springframework.data.mongodb.core.MongoOperations;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.client.RestTemplate;
 
+import com.sa.common.context.ApplicationContextUtils;
 import com.sa.common.model.Employee;
 import com.sa.common.model.WeatherData;
 
@@ -50,8 +52,15 @@ public class MovieController {
  	    String country = request.getParameter("country");
  	    String city = request.getParameter("city");
  	    System.out.println("city:"+city+"country:"+country);
+ 	   
+ 	   MongoOperations mongoOperation = (MongoOperations) ApplicationContextUtils.getApplicationContext().getBean("mongoTemplate");
+ 	  
+ 		
+ 	 
 		RestTemplate restTemplate = new RestTemplate();
         WeatherData data = restTemplate.getForObject("http://api.openweathermap.org/data/2.5/weather?q="+city+","+country, WeatherData.class);
+        
+        mongoOperation.save(data);
         System.out.println("Name:    " + data.getName());
         System.out.println("About:   " + data.getId());
         System.out.println("Phone:   " + data.getCod());
