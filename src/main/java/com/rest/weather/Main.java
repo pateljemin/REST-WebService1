@@ -2,10 +2,6 @@ package com.rest.weather;
 
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.webapp.WebAppContext;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.GenericXmlApplicationContext;
-
-import com.sa.common.context.ApplicationContextUtils;
 
 
 

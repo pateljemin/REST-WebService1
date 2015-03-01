@@ -57,10 +57,6 @@ private BaseDAO baseDAO;
  	    String city = request.getParameter("city");
  	    System.out.println("city:"+city+"country:"+country);
  	   
- 	   //MongoOperations mongoOperation = (MongoOperations) ApplicationContextUtils.getApplicationContext().getBean("mongoTemplate");
- 	  
- 		
- 	 
 		RestTemplate restTemplate = new RestTemplate();
         WeatherData data = restTemplate.getForObject("http://api.openweathermap.org/data/2.5/weather?q="+city+","+country, WeatherData.class);
         
